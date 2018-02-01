@@ -22,6 +22,13 @@ import (
 	"path"
 )
 
+const (
+	// sub director
+	SubDirConf    = "conf"
+	SubDirLuaLibs = "lualibs"
+	SubDirPlugins = "plugins"
+)
+
 var (
 	programHomeDirCache string
 )
@@ -55,4 +62,27 @@ func ProgramHomeDir(programName string, disableCache bool) (string, error) {
 	programHomeDirCache = dir
 
 	return dir, nil
+}
+
+// initialize working directory structure
+func InitHomeDir(programName string) error {
+	home, err := ProgramHomeDir(programName, true)
+	if err != nil {
+		return err
+	}
+
+	subDirs := []string{
+		SubDirConf,
+		SubDirLuaLibs,
+		SubDirPlugins,
+	}
+
+	for _, d := range subDirs {
+		p := path.Join(home, d)
+		if err = EnsurePath(p, true); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
