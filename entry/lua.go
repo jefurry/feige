@@ -30,7 +30,7 @@ import (
 
 const (
 	// lua state pool size default to 10
-	LUA_STATE_POOL_SIZE = 10
+	DEFAULT_LUA_STATE_POOL_SIZE = 10
 )
 
 var (
@@ -84,7 +84,7 @@ type LuaStatePool struct {
 
 func (lp *LuaStatePool) NewLuaStatePool(whenNew NewFunc, size int) *LuaStatePool {
 	if size <= 0 {
-		size = LUA_STATE_POOL_SIZE
+		size = DEFAULT_LUA_STATE_POOL_SIZE
 	}
 	lp.size = size
 
