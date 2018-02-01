@@ -27,6 +27,7 @@ const (
 	SubDirConf    = "conf"
 	SubDirLuaLibs = "lualibs"
 	SubDirPlugins = "plugins"
+	SubDirModules = "modules"
 )
 
 var (
@@ -75,6 +76,7 @@ func InitHomeDir(programName string) error {
 		SubDirConf,
 		SubDirLuaLibs,
 		SubDirPlugins,
+		SubDirModules,
 	}
 
 	for _, d := range subDirs {
