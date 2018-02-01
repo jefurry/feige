@@ -1,3 +1,6 @@
 package: github.com/jefurry/feige
 import:
 - package: github.com/mitchellh/go-homedir
+- package: github.com/codeskyblue/go-sh
+  version: ^0.2.0
+- package: github.com/yuin/gopher-lua

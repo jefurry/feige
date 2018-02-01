@@ -1,6 +1,14 @@
-hash: 7b3813edf665ff8de237da65a1c8084813808f5652fa99c25def0b75b6a4b41c
-updated: 2018-02-01T13:53:04.467566165+08:00
+hash: cb5ad3c68edd175304a35cbf06411ab3fa46ddc879ad2b4081d2139bce14ffee
+updated: 2018-02-01T15:54:56.212615968+08:00
 imports:
+- name: github.com/codeskyblue/go-sh
+  version: b097669b1569203c3ce05a6b8717d43140fdb3d5
 - name: github.com/mitchellh/go-homedir
   version: b8bc1bf767474819792c23f32d8286a45736f1c6
+- name: github.com/yuin/gopher-lua
+  version: 7d7bc8747e3f614c5c587729a341fe7d8903cdb8
+  subpackages:
+  - ast
+  - parse
+  - pm
 testImports: []
