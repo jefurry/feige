@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Feige.  If not, see <http://www.gnu.org/licenses/>.
 
+// Package entry implements LuaState Manages. It Wraps gopher-lua as runner.
 package entry
 
 import (
