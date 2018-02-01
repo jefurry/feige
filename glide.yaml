@@ -1,0 +1,3 @@
+package: github.com/jefurry/feige
+import:
+- package: github.com/mitchellh/go-homedir
