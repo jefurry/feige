@@ -19,7 +19,7 @@ package utils
 
 import (
 	"github.com/mitchellh/go-homedir"
-	"path"
+	"path/filepath"
 )
 
 const (
@@ -74,7 +74,7 @@ func InitHomeDir(programName string) error {
 	}
 
 	for _, d := range subDirs {
-		p := path.Join(home, d)
+		p := filepath.Join(home, d)
 		if err = EnsurePath(p, true); err != nil {
 			return err
 		}
