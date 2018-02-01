@@ -45,17 +45,11 @@ func ProgramHomeDir(programName string, disableCache bool) (string, error) {
 	var dir string
 	var err error
 
-	dir, err = homedir.Dir()
+	dir, err = homedir.Expand("~/." + programName)
 	if err != nil {
 		return "", err
 	}
 
-	dir, err = homedir.Expand(dir)
-	if err != nil {
-		return "", err
-	}
-
-	dir = path.Join(dir, "."+programName)
 	if err = EnsurePath(dir, true); err != nil {
 		return "", err
 	}
