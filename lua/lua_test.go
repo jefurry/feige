@@ -19,10 +19,13 @@ package lua
 
 import (
 	"github.com/yuin/gopher-lua"
+	"os"
 	"testing"
 )
 
 func TestLuaPath(t *testing.T) {
+	os.Setenv("HOME", "/home/feige")
+
 	if err := SetLuaPath(""); err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -34,14 +37,14 @@ func TestLuaPath(t *testing.T) {
 	if err := SetLuaPath("~/.feige/modules"); err != nil {
 		t.Fatalf(err.Error())
 	}
-	if lua.LuaPathDefault != "/Users/jefurry/.feige/modules/?.lua;/Users/jefurry/.feige/modules/?/init.lua" {
+	if lua.LuaPathDefault != "/home/feige/.feige/modules/?.lua;/home/feige/.feige/modules/?/init.lua" {
 		t.Fatalf("LuaPathDefault mismatching")
 	}
 
 	if err := AddLuaPath("~/.feige/lublibs"); err != nil {
 		t.Fatalf(err.Error())
 	}
-	if lua.LuaPathDefault != "/Users/jefurry/.feige/modules/?.lua;/Users/jefurry/.feige/modules/?/init.lua;/Users/jefurry/.feige/lublibs/?.lua;/Users/jefurry/.feige/lublibs/?/init.lua" {
+	if lua.LuaPathDefault != "/home/feige/.feige/modules/?.lua;/home/feige/.feige/modules/?/init.lua;/home/feige/.feige/lublibs/?.lua;/home/feige/.feige/lublibs/?/init.lua" {
 		t.Fatalf("LuaPathDefault mismatching")
 	}
 
@@ -53,7 +56,7 @@ func TestLuaPath(t *testing.T) {
 	if err := AddLuaPath("~/.feige/modules"); err != nil {
 		t.Fatalf(err.Error())
 	}
-	if lua.LuaPathDefault != "./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/Users/jefurry/.feige/modules/?.lua;/Users/jefurry/.feige/modules/?/init.lua" {
+	if lua.LuaPathDefault != "./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/home/feige/.feige/modules/?.lua;/home/feige/.feige/modules/?/init.lua" {
 		t.Fatalf("LuaPathDefault mismatching")
 	}
 }
