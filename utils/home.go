@@ -24,10 +24,11 @@ import (
 
 const (
 	// sub director
-	SubDirConf    = "conf"
-	SubDirLuaLibs = "lualibs"
-	SubDirPlugins = "plugins"
-	SubDirModules = "modules"
+	SUB_DIR_CONF    = "conf"
+	SUB_DIR_LUALIBS = "lualibs"
+	SUB_DIR_PLUGINS = "plugins"
+	SUB_DIR_MODULES = "modules"
+	SUB_DIR_TEMP    = "tmp"
 )
 
 var (
@@ -67,10 +68,11 @@ func InitHomeDir(programName string) error {
 	}
 
 	subDirs := []string{
-		SubDirConf,
-		SubDirLuaLibs,
-		SubDirPlugins,
-		SubDirModules,
+		SUB_DIR_CONF,
+		SUB_DIR_LUALIBS,
+		SUB_DIR_PLUGINS,
+		SUB_DIR_MODULES,
+		SUB_DIR_TEMP,
 	}
 
 	for _, d := range subDirs {
