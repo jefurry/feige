@@ -20,16 +20,26 @@ package utils
 import (
 	"crypto/md5"
 	"encoding/hex"
+	"fmt"
+	"github.com/jefurry/feige/app"
 	"math/rand"
 	"os"
 	"strconv"
 	"time"
 )
 
+func RandKey() string {
+	b := RandBytes(32)
+
+	return fmt.Sprintf("%s@%s-V%s-%s-%d", app.NAME, app.SITE, app.VERSION, b, time.Now().UnixNano())
+}
+
 func RandBytes(n int) []byte {
-	chars := []byte{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-		'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-		'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '_'}
+	chars := []byte{
+		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+		'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+		'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '_',
+	}
 
 	b := make([]byte, n)
 	for i, l := 0, len(chars); i < n; i++ {
