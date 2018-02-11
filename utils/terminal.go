@@ -18,6 +18,7 @@
 package utils
 
 import (
+	"golang.org/x/crypto/ssh/terminal"
 	"os"
 	"strconv"
 )
@@ -27,6 +28,39 @@ const (
 	DEFAULT_TERM_HEIGHT = 80
 	DEFAULT_TERM_WIDTH  = 40
 )
+
+func TerminalSize(h, w int) (int, int) {
+	var fd int
+
+	var th, tw int
+	if h < 0 || w < 0 {
+		fd = int(os.Stdin.Fd())
+		if terminal.IsTerminal(fd) {
+			if oldState, err := terminal.MakeRaw(fd); err == nil {
+				defer terminal.Restore(fd, oldState)
+				tw, th, _ = terminal.GetSize(fd)
+			}
+		}
+	}
+
+	if h < 0 {
+		if th >= 0 {
+			h = th
+		} else {
+			h = TerminalHeight(h)
+		}
+	}
+
+	if w < 0 {
+		if tw >= 0 {
+			w = tw
+		} else {
+			w = TerminalWidth(w)
+		}
+	}
+
+	return h, w
+}
 
 func TerminalName(name string) string {
 	if name != "" {
@@ -46,7 +80,7 @@ func TerminalHeight(h int) int {
 		return h
 	}
 
-	i, err := strconv.Atoi(os.Getenv("COLUMNS"))
+	i, err := strconv.Atoi(os.Getenv("LINES"))
 	if err == nil && i >= 0 {
 		return i
 	}
@@ -59,7 +93,7 @@ func TerminalWidth(w int) int {
 		return w
 	}
 
-	i, err := strconv.Atoi(os.Getenv("LINES"))
+	i, err := strconv.Atoi(os.Getenv("COLUMNS"))
 	if err == nil && i >= 0 {
 		return i
 	}
