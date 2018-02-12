@@ -4,3 +4,8 @@ import:
 - package: github.com/codeskyblue/go-sh
   version: ^0.2.0
 - package: github.com/yuin/gopher-lua
+- package: golang.org/x/crypto
+- package: github.com/flynn-archive/go-shlex
+- package: github.com/kballard/go-shellquote
+- package: github.com/pkg/sftp
+  version: ^1.4.0

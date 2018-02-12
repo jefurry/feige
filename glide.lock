@@ -1,14 +1,40 @@
-hash: cb5ad3c68edd175304a35cbf06411ab3fa46ddc879ad2b4081d2139bce14ffee
-updated: 2018-02-01T15:54:56.212615968+08:00
+hash: d69898f210f31935315debe098d84be120e3b5787bbef586eff787662b26a9bd
+updated: 2018-02-12T22:21:32.00307935+08:00
 imports:
 - name: github.com/codeskyblue/go-sh
   version: b097669b1569203c3ce05a6b8717d43140fdb3d5
+- name: github.com/flynn-archive/go-shlex
+  version: 3f9db97f856818214da2e1057f8ad84803971cff
+- name: github.com/kballard/go-shellquote
+  version: cd60e84ee657ff3dc51de0b4f55dd299a3e136f2
+- name: github.com/kr/fs
+  version: 2788f0dbd16903de03cb8186e5c7d97b69ad387b
 - name: github.com/mitchellh/go-homedir
   version: b8bc1bf767474819792c23f32d8286a45736f1c6
+- name: github.com/pkg/errors
+  version: 30136e27e2ac8d167177e8a583aa4c3fea5be833
+- name: github.com/pkg/sftp
+  version: 0159c83e42a88e5c35180f73b84298a6bdde1ec1
 - name: github.com/yuin/gopher-lua
   version: 7d7bc8747e3f614c5c587729a341fe7d8903cdb8
   subpackages:
   - ast
   - parse
   - pm
+- name: golang.org/x/crypto
+  version: 9de5f2eaf759b4c4550b3db39fed2e9e5f86f45c
+  subpackages:
+  - curve25519
+  - ed25519
+  - ed25519/internal/edwards25519
+  - internal/chacha20
+  - poly1305
+  - ssh
+  - ssh/agent
+  - ssh/terminal
+- name: golang.org/x/sys
+  version: 37707fdb30a5b38865cfb95e5aab41707daec7fd
+  subpackages:
+  - unix
+  - windows
 testImports: []
