@@ -19,6 +19,7 @@ package utils
 
 import (
 	"github.com/flynn-archive/go-shlex"
+	shellquote "github.com/kballard/go-shellquote"
 	"strconv"
 )
 
@@ -28,4 +29,8 @@ func ShlexQuote(s string) string {
 
 func ShlexSplit(s string) ([]string, error) {
 	return shlex.Split(s)
+}
+
+func ShlexJoin(args ...string) string {
+	return shellquote.Join(args...)
 }
