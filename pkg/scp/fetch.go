@@ -25,6 +25,6 @@ var (
 	ErrUnimplementScpFetch = errors.New("unimplements scp fetch file yet")
 )
 
-func (scp *Scp) FetchFile(remote, local string) (int64, error) {
+func (scp *Scp) Fetch(remote, local string) (int64, error) {
 	return 0, ErrUnimplementScpFetch
 }

@@ -22,11 +22,12 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-const (
-	DEFAULT_TERM_ECHO     = 0     // disable echoing
-	DEFAULT_TERM_ISIG     = 1     // Enable signals INTR, QUIT, [D]SUSP.
-	DEFAULT_TTY_OP_ISPEED = 14400 // input speed = 14.4kbaud
-	DEFAULT_TTY_OP_OSPEED = 14400 // output speed = 14.4kbaud
+type (
+	Terminal struct {
+		Name          string
+		Height, Width int
+		Modes         ssh.TerminalModes
+	}
 )
 
 // RequestPty requests the association of a pty with the session on the remote host.
@@ -37,26 +38,13 @@ const (
 //		ssh.TTY_OP_OSPEED: 14400, // output speed = 14.4kbaud
 // }
 //
-func (s *Session) RequestPty(term string, h, w int, termModes ssh.TerminalModes) error {
-	if !s.Started() {
-		return ErrSessionNoStarted
-	}
+func (t Terminal) RequestPty(session *ssh.Session) error {
+	term := utils.TerminalName(t.Name)
+	h, w := utils.TerminalSize(t.Height, t.Width)
 
-	term = utils.TerminalName(term)
-	h, w = utils.TerminalSize(h, w)
-
-	if err := s.session.RequestPty(term, h, w, termModes); err != nil {
+	if err := session.RequestPty(term, h, w, t.Modes); err != nil {
 		return err
 	}
 
 	return nil
-}
-
-func (s *Session) DefaultTerminalModels() ssh.TerminalModes {
-	return ssh.TerminalModes{
-		ssh.ECHO:          DEFAULT_TERM_ECHO, // disable echoing
-		ssh.ISIG:          DEFAULT_TERM_ISIG,
-		ssh.TTY_OP_ISPEED: DEFAULT_TTY_OP_ISPEED, // input speed = 14.4kbaud
-		ssh.TTY_OP_OSPEED: DEFAULT_TTY_OP_OSPEED, // output speed = 14.4kbaud
-	}
 }

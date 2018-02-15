@@ -19,27 +19,25 @@ package scp
 
 import (
 	"bytes"
-	"github.com/jefurry/feige/pkg/connection/gossh"
 	"github.com/jefurry/feige/utils"
 	"golang.org/x/crypto/ssh"
 	"path/filepath"
 	"strings"
 )
 
-func (scp *Scp) PutFile(local, remote string) (int64, error) {
-	if scp.sess == nil {
-		return 0, ErrSessionNil
+func (scp *Scp) Put(local, remote string) (int64, error) {
+	sess, err := scp.client.NewSession()
+	if err != nil {
+		return 0, err
 	}
+	defer sess.Close()
 
-	if !scp.sess.Started() {
-		return 0, gossh.ErrSessionNoStarted
+	session := sess.Session()
+	if err := scp.terminal.RequestPty(session); err != nil {
+		return 0, nil
 	}
-
-	defer scp.sess.Close()
 
 	scp.cmd.SetCMD(utils.ShlexJoin(scp.cmd.CMD(), "-tq", filepath.Dir(remote)))
-
-	session := scp.sess.Session()
 
 	stdout, err := session.StdoutPipe()
 	if err != nil {

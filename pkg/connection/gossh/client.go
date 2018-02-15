@@ -20,6 +20,7 @@ package gossh
 import (
 	"errors"
 	"fmt"
+	"github.com/jefurry/feige/pkg/command"
 	"golang.org/x/crypto/ssh"
 	"time"
 )
@@ -69,6 +70,26 @@ func (sc *Client) NewSession() (*Session, error) {
 	}
 
 	return NewSession(session), nil
+}
+
+func (sc *Client) Run(cmd string) ([]byte, error) {
+	session, err := sc.NewSession()
+	if err != nil {
+		return nil, err
+	}
+	defer session.Close()
+
+	return sc.Run(cmd)
+}
+
+func (sc *Client) Shell(cmd *command.Command, terminal Terminal) ([]byte, error) {
+	session, err := sc.NewSession()
+	if err != nil {
+		return nil, err
+	}
+	defer session.Close()
+
+	return session.Shell(cmd, terminal)
 }
 
 func (sc *Client) Started() bool {

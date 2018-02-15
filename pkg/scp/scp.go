@@ -18,27 +18,24 @@
 package scp
 
 import (
-	"errors"
 	"github.com/jefurry/feige/app"
 	"github.com/jefurry/feige/pkg/command"
 	"github.com/jefurry/feige/pkg/connection/gossh"
 )
 
-var (
-	ErrSessionNil = errors.New("scp: session must be not nil")
-)
-
 type (
 	Scp struct {
-		sess *gossh.Session
-		cmd  *command.Command
+		client   *gossh.Client
+		cmd      *command.Command
+		terminal gossh.Terminal
 	}
 )
 
-func NewScp(session *gossh.Session, cmd *command.Command) *Scp {
+func NewScp(client *gossh.Client, cmd *command.Command, terminal gossh.Terminal) *Scp {
 	c := &Scp{
-		sess: session,
-		cmd:  cmd,
+		client:   client,
+		cmd:      cmd,
+		terminal: terminal,
 	}
 	if cmd == nil {
 		// with default Command

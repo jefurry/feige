@@ -18,6 +18,7 @@
 package utils
 
 import (
+	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/terminal"
 	"os"
 	"strconv"
@@ -27,6 +28,13 @@ const (
 	DEFAULT_TERM_NAME   = "vt100"
 	DEFAULT_TERM_HEIGHT = 80
 	DEFAULT_TERM_WIDTH  = 40
+)
+
+const (
+	DEFAULT_TERM_ECHO     = 0     // disable echoing
+	DEFAULT_TERM_ISIG     = 1     // Enable signals INTR, QUIT, [D]SUSP.
+	DEFAULT_TTY_OP_ISPEED = 14400 // input speed = 14.4kbaud
+	DEFAULT_TTY_OP_OSPEED = 14400 // output speed = 14.4kbaud
 )
 
 func TerminalSize(h, w int) (int, int) {
@@ -99,4 +107,13 @@ func TerminalWidth(w int) int {
 	}
 
 	return DEFAULT_TERM_WIDTH
+}
+
+func DefaultTerminalModels() ssh.TerminalModes {
+	return ssh.TerminalModes{
+		ssh.ECHO:          DEFAULT_TERM_ECHO, // disable echoing
+		ssh.ISIG:          DEFAULT_TERM_ISIG,
+		ssh.TTY_OP_ISPEED: DEFAULT_TTY_OP_ISPEED, // input speed = 14.4kbaud
+		ssh.TTY_OP_OSPEED: DEFAULT_TTY_OP_OSPEED, // output speed = 14.4kbaud
+	}
 }

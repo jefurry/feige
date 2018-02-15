@@ -25,9 +25,13 @@ import (
 )
 
 // execute shell command on remote host
-func (s *Session) Shell(cmd *command.Command) ([]byte, error) {
+func (s *Session) Shell(cmd *command.Command, terminal Terminal) ([]byte, error) {
 	if !s.Started() {
 		return nil, ErrSessionNoStarted
+	}
+
+	if err := terminal.RequestPty(s.session); err != nil {
+		return nil, err
 	}
 
 	defer s.Close()
