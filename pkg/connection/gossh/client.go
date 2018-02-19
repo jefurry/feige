@@ -64,7 +64,7 @@ func (sc *Client) NewSession() (*Session, error) {
 		return nil, ErrClientNoConnected
 	}
 
-	return NewSessionWithClient(sc.client)
+	return NewSession(sc.client)
 }
 
 func (sc *Client) Run(cmd string) ([]byte, error) {

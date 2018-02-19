@@ -33,19 +33,19 @@ type (
 	}
 )
 
-func NewSession(session *ssh.Session) *Session {
+func NewSessionWithSession(session *ssh.Session) *Session {
 	return &Session{
 		session: session,
 	}
 }
 
-func NewSessionWithClient(client *ssh.Client) (*Session, error) {
+func NewSession(client *ssh.Client) (*Session, error) {
 	session, err := client.NewSession()
 	if err != nil {
 		return nil, err
 	}
 
-	return NewSession(session), nil
+	return NewSessionWithSession(session), nil
 }
 
 // execute command on remote host
