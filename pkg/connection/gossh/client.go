@@ -64,12 +64,7 @@ func (sc *Client) NewSession() (*Session, error) {
 		return nil, ErrClientNoConnected
 	}
 
-	session, err := sc.client.NewSession()
-	if err != nil {
-		return nil, err
-	}
-
-	return NewSession(session), nil
+	return NewSessionWithClient(sc.client)
 }
 
 func (sc *Client) Run(cmd string) ([]byte, error) {
@@ -94,6 +89,10 @@ func (sc *Client) Shell(cmd *command.Command, terminal Terminal) ([]byte, error)
 
 func (sc *Client) Started() bool {
 	return sc.client != nil
+}
+
+func (sc *Client) Client() *ssh.Client {
+	return sc.client
 }
 
 func (sc *Client) Close() error {

@@ -39,6 +39,15 @@ func NewSession(session *ssh.Session) *Session {
 	}
 }
 
+func NewSessionWithClient(client *ssh.Client) (*Session, error) {
+	session, err := client.NewSession()
+	if err != nil {
+		return nil, err
+	}
+
+	return NewSession(session), nil
+}
+
 // execute command on remote host
 // run once
 func (s *Session) Run(cmd string) ([]byte, error) {
