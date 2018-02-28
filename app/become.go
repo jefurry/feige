@@ -2,7 +2,7 @@ package app
 
 const (
 	DEFAULT_BECOME_METHOD     = "sudo"
-	DEFAULT_BECOME_EXECUTABLE = "/bin/bash"
+	DEFAULT_BECOME_EXECUTABLE = "/bin/sh"
 	DEFAULT_BECOME_EXE        = "/usr/bin/sudo"
 	DEFAULT_BECOME_USER       = "root"
 	DEFAULT_BECOME_FLAGS      = ""
