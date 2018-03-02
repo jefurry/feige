@@ -37,7 +37,7 @@ func (scp *Scp) Put(local, remote string) (int64, error) {
 		return 0, nil
 	}
 
-	scp.cmd.SetCMD(utils.ShlexJoin(scp.cmd.CMD(), "-tq", filepath.Dir(remote)))
+	scp.cmd.SetCMD(utils.ShlexJoin(scp.cmd.CMD(), "-trq", filepath.Dir(remote)))
 
 	stdout, err := session.StdoutPipe()
 	if err != nil {
